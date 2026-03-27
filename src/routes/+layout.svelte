@@ -1,7 +1,7 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
-	import '../base.css'
-	import '../app.css'
+	import '../base.css';
+	import '../app.css';
 
 	let { children } = $props();
 </script>
