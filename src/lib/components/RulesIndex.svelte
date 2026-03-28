@@ -1,37 +1,28 @@
 <script lang="ts">
-	let { selectedRule = 3, onRuleSelected = () => {} } = $props();
+	import { siteContent } from '$lib/data/content';
+	import { defaultRuleNumber, rules } from '$lib/data/rules';
 
-	const rules = [
-		'Visibility of System Status',
-		'Match Between the System and the Real World',
-		'User Control and Freedom',
-		'Consistency and Standards',
-		'Error Prevention',
-		'Recognition Rather than Recall',
-		'Flexibility and Efficiency of Use',
-		'Aesthetic and Minimalist Design',
-		'Help Users Recognize, Diagnose, and Recover from Errors',
-		'Help and Documentation'
-	];
-
-	function handleRuleClick(number: number) {
-		onRuleSelected(number);
-	}
+	let {
+		selectedRule = defaultRuleNumber,
+		onRuleSelected
+	}: { selectedRule?: number; onRuleSelected: (ruleNumber: number) => void } = $props();
 </script>
 
 <nav class="rules-nav">
-	<h2>Reguły zasad heurystycznych</h2>
+	<h2 id="rules-heading">{siteContent.rulesHeading}</h2>
 	<ol>
-		{#each rules as rule, index (rule)}
+		{#each rules as rule (rule.number)}
 			<li class="rule-item">
-				<span class="rule-number">{index + 1}</span>
 				<button
 					class="rule-button"
-					class:active={selectedRule === index + 1}
-					onclick={() => handleRuleClick(index + 1)}
-					aria-current={selectedRule === index + 1 ? 'true' : 'false'}
+					class:active={selectedRule === rule.number}
+					type="button"
+					onclick={() => onRuleSelected(rule.number)}
+					aria-pressed={selectedRule === rule.number}
+					aria-controls="rule-view"
 				>
-					{rule}
+					<span class="rule-number">{rule.number}</span>
+					<span>{rule.title}</span>
 				</button>
 			</li>
 		{/each}
@@ -43,18 +34,18 @@
 		display: flex;
 		flex-direction: column;
 		height: fit-content;
-		top: 2rem;
+		position: sticky;
+		top: clamp(1rem, 3vw, 2rem);
 	}
 
 	.rule-number {
-		font-weight: bold;
-		color: #088f8f;
+		font-weight: 700;
+		color: var(--color-accent);
+		font-variant-numeric: tabular-nums;
 	}
 
 	.rule-item {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
+		margin-bottom: 0.5rem;
 	}
 
 	h2 {
@@ -64,32 +55,47 @@
 
 	ol {
 		margin: 0;
-		padding-left: 0;
+		padding: 0;
 		list-style: none;
-	}
-
-	li {
-		margin-bottom: 0.5rem;
 	}
 
 	.rule-button {
 		width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
 		text-align: left;
 		padding: 0.75rem 1rem;
-		border: none;
+		border: 1px solid transparent;
 		background-color: transparent;
 		cursor: pointer;
-		border-radius: 4px;
+		border-radius: 0.75rem;
 		font-size: 1rem;
-		color: #333;
+		color: var(--color-text);
+		transition:
+			background-color 0.2s ease,
+			border-color 0.2s ease,
+			transform 0.2s ease;
 	}
 
 	.rule-button:hover {
-		background-color: #f0f0f0;
+		background-color: var(--color-surface-hover);
 	}
 
 	.rule-button.active {
-		border: 2px solid #333;
-		font-weight: 500;
+		border-color: var(--color-border-strong);
+		background-color: var(--color-surface-hover);
+		font-weight: 600;
+	}
+
+	.rule-button:focus-visible {
+		outline: 3px solid var(--color-focus);
+		outline-offset: 2px;
+	}
+
+	@media (max-width: 768px) {
+		.rules-nav {
+			position: static;
+		}
 	}
 </style>

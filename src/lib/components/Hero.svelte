@@ -1,37 +1,43 @@
-<section class="hero-content">
-	<article>
-		<h2>Czemu służy?</h2>
-		<p>Opis analizy</p>
-	</article>
+<script lang="ts">
+	import { siteContent } from '$lib/data/content';
+</script>
 
-	<article>
-		<h2>Kto opracował zbiór zasad heurystycznych?</h2>
-		<p>Zbiór zasad heurystycznych zostałopracowany przez Jakoba Nielsen'a w 1994 roku.</p>
-	</article>
+<section class="hero-content">
+	{#each siteContent.heroSections as section (section.title)}
+		<article>
+			<h2>{section.title}</h2>
+			<p>{section.text}</p>
+		</article>
+	{/each}
 </section>
 
 <style>
-	section.hero-content {
+	.hero-content {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		flex: 1;
-		padding: 2rem 1.5rem;
-		gap: 2rem;
+		padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 1.5rem) clamp(2rem, 6vw, 4rem);
+		gap: clamp(1.5rem, 4vw, 2.5rem);
 	}
 
 	article {
-		max-width: 600px;
+		max-width: 38rem;
 	}
 
 	h2 {
-		margin-top: 0;
-		margin-bottom: 1rem;
-		font-size: 1.5rem;
+		margin-bottom: 0.75rem;
+		font-size: clamp(1.25rem, 3vw, 1.75rem);
 	}
 
 	p {
 		line-height: 1.6;
-		margin: 0;
+		color: var(--color-text-soft);
+	}
+
+	@media (max-width: 640px) {
+		.hero-content {
+			justify-content: flex-end;
+		}
 	}
 </style>

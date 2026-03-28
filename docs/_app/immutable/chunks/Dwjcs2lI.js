@@ -4,77 +4,77 @@ import {
 	p as u,
 	c as n,
 	b as d,
-	a as m,
+	e as m,
 	h as p,
-	e as _,
+	f as _,
 	m as v,
 	s as b
-} from './Biq-wM9h.js';
+} from './B8weEiwe.js';
 class w {
 	anchor;
 	#t = new Map();
 	#s = new Map();
 	#e = new Map();
 	#i = new Set();
-	#a = !0;
+	#f = !0;
 	constructor(t, s = !0) {
-		((this.anchor = t), (this.#a = s));
+		((this.anchor = t), (this.#f = s));
 	}
-	#f = (t) => {
+	#a = (t) => {
 		if (this.#t.has(t)) {
 			var s = this.#t.get(t),
 				e = this.#s.get(s);
 			if (e) (l(e), this.#i.delete(s));
 			else {
-				var a = this.#e.get(s);
-				a &&
-					(this.#s.set(s, a.effect),
+				var f = this.#e.get(s);
+				f &&
+					(this.#s.set(s, f.effect),
 					this.#e.delete(s),
-					a.fragment.lastChild.remove(),
-					this.anchor.before(a.fragment),
-					(e = a.effect));
+					f.fragment.lastChild.remove(),
+					this.anchor.before(f.fragment),
+					(e = f.effect));
 			}
-			for (const [i, f] of this.#t) {
+			for (const [i, a] of this.#t) {
 				if ((this.#t.delete(i), i === t)) break;
-				const r = this.#e.get(f);
-				r && (o(r.effect), this.#e.delete(f));
+				const r = this.#e.get(a);
+				r && (o(r.effect), this.#e.delete(a));
 			}
-			for (const [i, f] of this.#s) {
+			for (const [i, a] of this.#s) {
 				if (i === s || this.#i.has(i)) continue;
 				const r = () => {
 					if (Array.from(this.#t.values()).includes(i)) {
 						var c = document.createDocumentFragment();
-						(v(f, c), c.append(n()), this.#e.set(i, { effect: f, fragment: c }));
-					} else o(f);
+						(v(a, c), c.append(n()), this.#e.set(i, { effect: a, fragment: c }));
+					} else o(a);
 					(this.#i.delete(i), this.#s.delete(i));
 				};
-				this.#a || !e ? (this.#i.add(i), u(f, r, !1)) : r();
+				this.#f || !e ? (this.#i.add(i), u(a, r, !1)) : r();
 			}
 		}
 	};
 	#r = (t) => {
 		this.#t.delete(t);
 		const s = Array.from(this.#t.values());
-		for (const [e, a] of this.#e) s.includes(e) || (o(a.effect), this.#e.delete(e));
+		for (const [e, f] of this.#e) s.includes(e) || (o(f.effect), this.#e.delete(e));
 	};
 	ensure(t, s) {
 		var e = m,
-			a = b();
+			f = b();
 		if (s && !this.#s.has(t) && !this.#e.has(t))
-			if (a) {
+			if (f) {
 				var i = document.createDocumentFragment(),
-					f = n();
-				(i.append(f), this.#e.set(t, { effect: d(() => s(f)), fragment: i }));
+					a = n();
+				(i.append(a), this.#e.set(t, { effect: d(() => s(a)), fragment: i }));
 			} else
 				this.#s.set(
 					t,
 					d(() => s(this.anchor))
 				);
-		if ((this.#t.set(e, t), a)) {
+		if ((this.#t.set(e, t), f)) {
 			for (const [r, h] of this.#s) r === t ? e.unskip_effect(h) : e.skip_effect(h);
 			for (const [r, h] of this.#e) r === t ? e.unskip_effect(h.effect) : e.skip_effect(h.effect);
-			(e.oncommit(this.#f), e.ondiscard(this.#r));
-		} else (p && (this.anchor = _), this.#f(e));
+			(e.oncommit(this.#a), e.ondiscard(this.#r));
+		} else (p && (this.anchor = _), this.#a(e));
 	}
 }
 export { w as B };

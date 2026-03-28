@@ -3,14 +3,14 @@
 	import Hero from './Hero.svelte';
 </script>
 
-<section>
+<section class="front-screen" aria-labelledby="page-title">
 	<Header />
 	<Hero />
 </section>
 
 <style>
-	section {
-		height: 100vh;
+	.front-screen {
+		min-height: 100svh;
 		display: flex;
 		flex-direction: column;
 	}
