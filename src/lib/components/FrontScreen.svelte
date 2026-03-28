@@ -10,8 +10,14 @@
 
 <style>
 	.front-screen {
-		min-height: 100svh;
 		display: flex;
 		flex-direction: column;
+	}
+
+	@media (max-width: 640px) {
+		.front-screen {
+			justify-content: flex-start;
+			padding-block: clamp(1rem, 3svh, 2rem);
+		}
 	}
 </style>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Footer from '$lib/components/Footer.svelte';
 	import FrontScreen from '$lib/components/FrontScreen.svelte';
 	import RulesIndex from '$lib/components/RulesIndex.svelte';
 	import RuleView from '$lib/components/RuleView.svelte';
@@ -7,14 +8,26 @@
 	let selectedRule = defaultRuleNumber;
 </script>
 
-<FrontScreen />
+<main class="page-content">
+	<FrontScreen />
 
-<main class="rules-container">
-	<RulesIndex onRuleSelected={(ruleNumber: number) => (selectedRule = ruleNumber)} {selectedRule} />
-	<RuleView number={selectedRule} />
+	<section class="rules-container" aria-labelledby="rules-heading">
+		<RulesIndex
+			onRuleSelected={(ruleNumber: number) => (selectedRule = ruleNumber)}
+			{selectedRule}
+		/>
+		<RuleView number={selectedRule} />
+	</section>
 </main>
 
+<Footer />
+
 <style>
+	.page-content {
+		display: flex;
+		flex-direction: column;
+	}
+
 	.rules-container {
 		display: grid;
 		grid-template-columns: minmax(16rem, 24rem) minmax(0, 1fr);
@@ -25,9 +38,10 @@
 		width: 100%;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: 1024px) {
 		.rules-container {
 			grid-template-columns: 1fr;
+			margin-top: clamp(1.25rem, 4vw, 2rem);
 		}
 	}
 </style>
