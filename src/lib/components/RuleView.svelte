@@ -23,7 +23,7 @@
 		</div>
 
 		{#if rule.images.length}
-			<div class="images">
+			<div class="images" class:single={rule.images.length === 1}>
 				{#each rule.images as image (image.src)}
 					<figure class="image">
 						<img src={image.src} alt={image.alt} loading="lazy" />
@@ -70,19 +70,26 @@
 		margin-top: 1rem;
 	}
 
+	.images.single {
+		grid-template-columns: minmax(0, 1fr);
+		justify-content: center;
+	}
+
 	figure {
 		margin: 0;
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		gap: 0.5rem;
 	}
 
 	img {
 		width: 100%;
+		max-height: 26rem;
 		aspect-ratio: 4 / 3;
 		height: auto;
+		padding: 0.75rem;
 		border-radius: 0.75rem;
-		border: 1px solid var(--color-border);
 		object-fit: contain;
 		background-color: var(--color-surface-hover);
 	}
@@ -118,8 +125,10 @@
 		}
 
 		img {
-			width: min(100%, 24rem);
-			aspect-ratio: auto;
+			width: 100%;
+			max-height: 22rem;
+			aspect-ratio: initial;
+			padding: 0.625rem;
 			margin-block: 0.25rem;
 		}
 

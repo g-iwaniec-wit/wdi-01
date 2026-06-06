@@ -130,16 +130,17 @@
 	.rules-select {
 		width: 100%;
 		appearance: none;
-		border: 1px solid var(--color-border);
+		border: 2px solid var(--color-border-strong);
 		border-radius: 1.25rem;
 		background: var(--color-background);
 		color: var(--color-text);
-		padding: 1.15rem 3.5rem 1.15rem 1.25rem;
+		padding: calc(1.15rem - 1px) 3.5rem calc(1.15rem - 1px) calc(1.25rem - 1px);
 		font: inherit;
 		font-weight: 600;
 		font-size: 1.05rem;
 		line-height: 1.3;
-		box-shadow: var(--shadow-soft);
+		cursor: pointer;
+		box-shadow: 0 0.75rem 1.5rem -1.25rem rgb(15 23 42 / 0.45);
 	}
 
 	.rules-select:focus-visible {
@@ -207,18 +208,10 @@
 			top: 0;
 			z-index: 10;
 			padding: 0.5rem 0 0.75rem;
-			background: var(--color-background);
 		}
 
 		.rules-nav::before {
-			content: '';
-			position: absolute;
-			inset: 0;
-			left: 50%;
-			width: 100vw;
-			transform: translateX(-50%);
-			background: var(--color-background);
-			z-index: -1;
+			content: none;
 		}
 
 		.rules-list {
